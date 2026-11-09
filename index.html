@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aistriú Health</title>
+<meta name="description" content="Your heart has a language. We make it readable.">
+<meta property="og:title" content="Aistriú Health">
+<meta property="og:description" content="Your heart has a language. We make it readable.">
+<meta name="theme-color" content="#0E1A2B" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F4F6F8" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%230E1A2B'/%3E%3Cpath d='M36 54V76a24 24 0 0 0 48 0V54' fill='none' stroke='%23F4F6F8' stroke-width='15' stroke-linecap='round'/%3E%3Cpath d='M51 37L73 19' fill='none' stroke='%231A9E9B' stroke-width='12' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one screen. The ú top left, one line running edge to edge that becomes the name, the tagline under it, a quiet footer. */
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --fg:#0E1A2B; --muted:#5B6B82; --line:#D5DCE4;
+  --tide:#1A9E9B; --tide-text:#117F7C; --amber:#C9731B; --hollow:#8A97A8;
+  --display:"Sora",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#0E1A2B; --surface:#14243A; --fg:#F4F6F8; --muted:#9BA8B8; --line:#26384D; --tide-text:#58C4BE; --amber:#E08A2B; --hollow:#6F7F93; color-scheme:dark }
+}
+:root[data-theme="dark"]{ --bg:#0E1A2B; --surface:#14243A; --fg:#F4F6F8; --muted:#9BA8B8; --line:#26384D; --tide-text:#58C4BE; --amber:#E08A2B; --hollow:#6F7F93; color-scheme:dark }
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 var(--display)}
+.wrap{width:100%;max-width:1088px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:2px solid var(--tide);outline-offset:3px;border-radius:4px}
+.stage{min-height:100%;display:flex;flex-direction:column;overflow-x:clip}
+.top{padding-block:18px 0}
+.top .icon{display:block;width:44px;height:44px;margin-left:-6px}
+.u-stroke{stroke:var(--fg)} .u-fada{stroke:var(--tide)}
+.mid{flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:clamp(40px,7vh,80px) clamp(56px,13vh,150px)}
+.gl{display:block;width:min(100%,700px);height:auto;overflow:visible;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.gl .ln{fill:none;stroke:var(--fg);stroke-width:2.1px;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round;transition:stroke 1.1s}
+.gl.sig .ln{stroke:var(--tide);transition-duration:.5s}
+.gl .hl path{fill:none;stroke:var(--tide);stroke-width:2.6px;vector-effect:non-scaling-stroke;stroke-linecap:round;opacity:0;transition:opacity .18s}
+.gl .hl.on path{opacity:1}
+.gl text{font:600 46px var(--display);fill:var(--fg);text-anchor:middle;opacity:0;transform:translateY(-8px);transform-box:fill-box;transition:opacity .34s,transform .34s}
+.gl .ug{opacity:0;transform:translateY(-8px);transform-box:fill-box;transition:opacity .34s,transform .34s}
+.gl .ug path{fill:none;stroke-linecap:round}
+.gl .ug .uu{stroke:var(--fg);stroke-width:15}
+.gl .ug .uf{stroke:var(--tide);stroke-width:12}
+.gl text.on,.gl .ug.on{opacity:1;transform:none}
+h1{font:600 clamp(29px,5vw,56px)/1.06 var(--display);letter-spacing:-.032em;margin:clamp(30px,6vh,64px) 0 0;text-wrap:balance}
+h1 span{display:block}
+.foot{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-block:0 26px;font:500 12px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<div class="stage">
+  <header class="wrap top">
+    <svg class="icon" viewBox="0 0 120 120" role="img" aria-label="Aistriú"><path d="M36 54V76a24 24 0 0 0 48 0V54" class="u-stroke" fill="none" stroke-width="15" stroke-linecap="round"/><path d="M51 37L73 19" class="u-fada" fill="none" stroke-width="12" stroke-linecap="round"/></svg>
+  </header>
+  <main class="wrap mid">
+    <svg class="gl" id="gl" viewBox="14 0 420 112" role="button" tabindex="0" aria-label="aistriú, written in Ogham with the letters beneath. Press to replay the animation."></svg>
+    <h1><span>Your heart has a language.</span> <span>We make it readable.</span></h1>
+  </main>
+  <footer class="wrap foot"><span>Aistriú Health</span><span>More soon</span></footer>
+</div>
+
+<script>
+(function(){
+const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* ---------- the line: heartbeat (m = 1) to Ogham (m = 0) ---------- */
+const OG = {a:['v',1], i:['v',5], s:['b',4], t:['h',3], r:['m',5], u:['v',3]};   // v = notch across, b = below, h = above, m = diagonal
+const WORD = ['a','i','s','t','r','i','u'], LAT = ['a','i','s','t','r','i','u'];
+const CELL = 60, W = CELL*WORD.length, EXT = 1700, SP = 8.5, Y = 30, BASE = 100, FS = 46;
+const gl = document.getElementById('gl');
+
+const strokes = [], cells = [];
+WORD.forEach((l, i) => { const [type, count] = OG[l], x0 = i*CELL + CELL/2 - (count - 1)*SP/2; const xs = []; for (let k = 0; k < count; k++){ strokes.push({x: x0 + k*SP, type}); xs.push(x0 + k*SP); } cells.push({type, xs}); });
+const strokeD = (type, x) => type === 'v' ? `M${x} ${Y-7}V${Y+7}` : type === 'b' ? `M${x} ${Y}V${Y+19}` : type === 'h' ? `M${x} ${Y}V${Y-19}` : `M${x-5} ${Y+16}L${x+5} ${Y-16}`;
+
+const tri = u => 1 - Math.abs(2*u - 1);
+const seg = (u, a, b) => u < .25 ? [a[0]*u/.25, a[1]*u/.25] : u < .75 ? [a[0] + (b[0] - a[0])*(u - .25)/.5, a[1] + (b[1] - a[1])*(u - .25)/.5] : [b[0]*(1 - u)/.25, b[1]*(1 - u)/.25];
+const spike = (type, u) => type === 'h' ? [0, -19*tri(u)] : type === 'b' ? [0, 19*tri(u)] : type === 'v' ? seg(u, [0, -7], [0, 7]) : seg(u, [-5, 16], [5, -16]);
+/* one polyline; each point knows where it sits on the heartbeat and where it sits on the Ogham line */
+const pts = [], HW = 3.6; let cur = -EXT;
+const stem = to => { const n = Math.max(1, Math.ceil((to - cur)/0.9)); for (let k = pts.length ? 1 : 0; k <= n; k++){ const x = cur + (to - cur)*k/n; pts.push([x, x, Y]); } cur = to; };
+for (const st of strokes){ stem(st.x - HW); for (let k = 0; k <= 8; k++){ const u = k/8, [dx, dy] = spike(st.type, u); pts.push([st.x - HW + 2*HW*u, st.x + dx, Y + dy]); } cur = st.x + HW; }
+stem(W + EXT);
+
+/* idealised heartbeat as felt at the chest: the textbook shape, time in ms around the moment the aortic valve opens */
+const g = (t, c, w) => Math.exp(-0.5*Math.pow((t - c)/w, 2));
+const scg = t => 0.2*g(t,-150,20) - 0.12*g(t,-115,18) + 0.38*g(t,-30,7) - 0.8*g(t,-14,7) + 1.0*g(t,10,8) - 0.72*g(t,36,10) + 0.46*g(t,72,17) - 0.14*g(t,125,24) - 0.22*g(t,262,8) + 0.42*g(t,278,8) - 0.3*g(t,298,9) - 0.42*g(t,356,12) + 0.34*g(t,402,18) - 0.1*g(t,450,22);
+const PERIOD = 205, AMP = 21, beatY = x => Y - scg(((x/PERIOD*1000 % 1000) + 1000) % 1000 - 260)*AMP;
+
+/* the last letter is the logo ú itself, scaled so its bowl is exactly the x-height of the other letters */
+const UK = FS*0.5425/61, UX = 6*CELL + CELL/2;
+gl.innerHTML = '<rect x="-' + EXT + '" y="0" width="' + (W + 2*EXT) + '" height="112" fill="transparent"/><path class="ln"/>'
+  + cells.map(c => '<g class="hl">' + c.xs.map(x => `<path d="${strokeD(c.type, x)}"/>`).join('') + '</g>').join('')
+  + LAT.slice(0, 6).map((ch, i) => `<text x="${i*CELL + CELL/2}" y="${BASE}">${ch}</text>`).join('')
+  + `<g class="ug"><g transform="translate(${UX} ${BASE + 0.4}) scale(${UK.toFixed(4)}) translate(-60 -107.5)"><path class="uu" d="M36 54V76a24 24 0 0 0 48 0V54"/><path class="uf" d="M51 37L73 19"/></g></g>`;
+const ln = gl.querySelector('.ln'), hl = [...gl.querySelectorAll('.hl')], txt = [...gl.querySelectorAll('text'), gl.querySelector('.ug')];
+
+let m = 0, target = 0, phase = 0, raf = 0, last = 0, run = 0;
+function draw(){
+  const e = m*m*(3 - 2*m); let d = '';
+  for (let i = 0; i < pts.length; i++){ const p = pts[i], x = p[1] + (p[0] - p[1])*e, y = e ? p[2] + (beatY(p[0] + phase) - p[2])*e : p[2]; d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); }
+  ln.setAttribute('d', d);
+}
+function tick(now){
+  const dt = Math.min(50, now - last); last = now;
+  if (m !== target){ m += Math.sign(target - m)*dt/1500; m = Math.max(0, Math.min(1, m)); }
+  if (m > 0) phase += dt*0.03;
+  draw(); raf = (m !== target || m > 0) ? requestAnimationFrame(tick) : 0;
+}
+function go(to){ target = to; gl.classList.toggle('sig', to === 1); if (!raf){ last = performance.now(); raf = requestAnimationFrame(tick); } }
+const until = (v, my) => new Promise(r => { const c = () => (m === v || my !== run ? r() : setTimeout(c, 50)); c(); });
+const showName = on => { txt.forEach(t => t.classList.toggle('on', on)); hl.forEach(h => h.classList.remove('on')); };
+
+async function play(first){
+  const my = ++run;
+  if (reduced){ m = target = 0; draw(); showName(true); return; }
+  showName(false);
+  if (first){ m = 1; go(1); } else { await sleep(220); if (my !== run) return; go(1); await until(1, my); }
+  await sleep(first ? 1300 : 900); if (my !== run) return;
+  go(0); await until(0, my); if (my !== run) return;
+  await sleep(160);
+  for (let i = 0; i < txt.length; i++){
+    if (my !== run) return;
+    hl[i].classList.add('on'); await sleep(150); if (my !== run) return;
+    txt[i].classList.add('on');
+    await sleep(190); hl[i].classList.remove('on');
+  }
+}
+
+/* resting state first, so the page is complete even if nothing else runs */
+draw(); showName(true);
+play(true);                                                    // on load
+gl.addEventListener('click', () => play(false));               // on click
+gl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); play(false); } });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) play(false); });   // on coming back to the tab
+})();
+</script>
+</body>
+</html>
