@@ -34,6 +34,8 @@
 
 *{box-sizing:border-box}
 html,body{height:100%}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
 body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 var(--display)}
 .wrap{width:100%;max-width:1088px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 :focus-visible{outline:2px solid var(--tide);outline-offset:3px;border-radius:4px}
@@ -178,6 +180,8 @@ play(true);                                                    // on load
 gl.addEventListener('click', () => play(false));               // on click
 gl.addEventListener('mousedown', e => e.preventDefault());        // a mouse click or tap must not leave a focus box; keyboard focus still shows one
 gl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); play(false); } });
+let away = false;                                              // on scrolling back to the top
+window.addEventListener('scroll', () => { const y = window.scrollY; if (y > window.innerHeight*0.45) away = true; else if (away && y < 60){ away = false; play(false); } }, {passive:true});
 document.addEventListener('visibilitychange', () => { if (!document.hidden) play(false); });   // on coming back to the tab
 })();
 </script>
