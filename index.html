@@ -68,7 +68,8 @@ h1 span{display:block}
 .hint{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font:500 12px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;padding-block:0 26px}
 .hint:hover{color:var(--fg)}
 .hint svg{width:10px;height:10px}
-.name{border-top:1px solid var(--line);min-height:100svh;display:flex;align-items:center;padding-block:clamp(40px,8vh,90px)}
+.end{min-height:100svh;display:flex;flex-direction:column}
+.name{border-top:1px solid var(--line);flex:1;display:flex;align-items:center;padding-block:clamp(40px,8vh,90px)}
 .name .card{width:fit-content;max-width:100%;margin-inline:auto}
 .name .lab{font:500 12px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 22px}
 .name .word{font:600 clamp(44px,8vw,72px)/1 var(--display);letter-spacing:-.03em;margin:0;white-space:nowrap}
@@ -95,7 +96,8 @@ h1 span{display:block}
   </main>
   <div class="wrap"><a class="hint" href="#name">The name <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 1v8M1.5 5.5 5 9l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
 </div>
-<section class="name" id="name">
+<div class="end" id="name">
+<section class="name">
   <div class="wrap"><div class="card">
     <p class="lab">The name</p>
     <p class="word" role="img" aria-label="aistriú">aistri<svg viewBox="28.5 13 63 94.5" aria-hidden="true"><path class="u-stroke" stroke-width="15" d="M36 54V76a24 24 0 0 0 48 0V54"/><path class="u-fada" stroke-width="12" d="M51 37L73 19"/></svg></p>
@@ -111,6 +113,7 @@ h1 span{display:block}
   </div></div>
 </section>
 <footer class="wrap foot" style="padding-top:22px"><span>Aistriú Health</span><span>More soon</span></footer>
+</div>
 
 <script>
 (function(){
