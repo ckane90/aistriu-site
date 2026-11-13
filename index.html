@@ -3,9 +3,14 @@
 
   ᚛ᚐᚔᚄᚈᚏᚔᚒ᚜
 
-  Reading the source? Good instinct.
-  I'm a doctor building something where signal processing, machine learning and cardiology meet,
-  and I'm looking for a technical co-founder.
+  Well, hello there.
+
+  I’m a cardiologist who’s been experimenting with physiological signals, signal processing and machine learning. It’s led to some interesting results, and I’m seeing how far I can take it.
+
+  I’m looking for a UK-based technical co-founder. Someone curious, inventive, and happy to spend an unreasonable amount of time figuring out whether an idea actually works.
+
+  If that sounds interesting, say hello.
+
   hello@aistriuhealth.com
 
 -->
@@ -128,7 +133,7 @@ h1 span{display:block}
 </div>
 
 <script>
-try{console.log("%c᚛ᚐᚔᚄᚈᚏᚔᚒ᚜","font-size:28px;color:#1A9E9B");console.log("Reading the source? Good instinct.\nI'm a doctor building something where signal processing, machine learning and cardiology meet,\nand I'm looking for a technical co-founder.\nhello@aistriuhealth.com")}catch(e){}
+try{console.log("%c᚛ᚐᚔᚄᚈᚏᚔᚒ᚜","font-size:28px;color:#1A9E9B");console.log("Well, hello there.\n\nI’m a cardiologist who’s been experimenting with physiological signals, signal processing and machine learning. It’s led to some interesting results, and I’m seeing how far I can take it.\n\nI’m looking for a UK-based technical co-founder. Someone curious, inventive, and happy to spend an unreasonable amount of time figuring out whether an idea actually works.\n\nIf that sounds interesting, say hello.\n\nhello@aistriuhealth.com")}catch(e){}
 (function(){
 const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -162,7 +167,8 @@ const UK = FS*0.5425/61, UX = 6*CELL + CELL/2;
 gl.innerHTML = '<rect x="-' + EXT + '" y="0" width="' + (W + 2*EXT) + '" height="112" fill="transparent"/><path class="ln"/>'
   + cells.map(c => '<g class="hl">' + c.xs.map(x => `<path d="${strokeD(c.type, x)}"/>`).join('') + '</g>').join('')
   + LAT.slice(0, 6).map((ch, i) => `<text x="${i*CELL + CELL/2}" y="${BASE}">${ch}</text>`).join('')
-  + `<g class="ug"><g transform="translate(${UX} ${BASE + 0.4}) scale(${UK.toFixed(4)}) translate(-60 -107.5)"><path class="uu" d="M36 54V76a24 24 0 0 0 48 0V54"/><path class="uf" d="M51 37L73 19"/></g></g>`;
+  + `<g class="ug"><g transform="translate(${UX} ${BASE + 0.4}) scale(${UK.toFixed(4)}) translate(-60 -107.5)"><path class="uu" d="M36 54V76a24 24 0 0 0 48 0V54"/><path class="uf" d="M51 37L73 19"/></g></g>`
+  + WORD.map((l, i) => `<rect class="cell" data-i="${i}" x="${i*CELL}" y="0" width="${CELL}" height="112" fill="transparent"/>`).join('');
 const ln = gl.querySelector('.ln'), hl = [...gl.querySelectorAll('.hl')], txt = [...gl.querySelectorAll('text'), gl.querySelector('.ug')];
 
 let m = 0, target = 0, phase = 0, raf = 0, last = 0, run = 0;
@@ -179,6 +185,11 @@ function tick(now){
 }
 function go(to){ target = to; gl.classList.toggle('sig', to === 1); if (!raf){ last = performance.now(); raf = requestAnimationFrame(tick); } }
 const until = (v, my) => new Promise(r => { const c = () => (m === v || my !== run ? r() : setTimeout(c, 50)); c(); });
+/* at rest, a mouse over a letter lights its Ogham strokes; a click still replays the animation */
+gl.querySelectorAll('.cell').forEach(c => { const i = +c.dataset.i;
+  c.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse' && m === 0 && target === 0 && txt[i].classList.contains('on')) hl[i].classList.add('on'); });
+  c.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse' && m === 0 && target === 0) hl[i].classList.remove('on'); });
+});
 const showName = on => { txt.forEach(t => t.classList.toggle('on', on)); hl.forEach(h => h.classList.remove('on')); };
 
 async function play(first){
