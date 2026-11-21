@@ -77,11 +77,14 @@ body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 var(--displ
 .gl .ug .uu{stroke:var(--fg);stroke-width:15}
 .gl .ug .uf{stroke:var(--tide);stroke-width:12}
 .gl text.on,.gl .ug.on{opacity:1;transform:none}
+/* a real ú for copy, search and text readers; the drawn logo ú is what is seen */
+.gl text.sr{opacity:0;transition:none}
+span.sr{font-size:0}
 .name .ogline{margin:0 0 clamp(8px,1.4vw,14px);line-height:0;color:var(--fg)}
 .name .ogline svg{display:block;overflow:visible}
 .name .ogline path{stroke-width:clamp(1.1px,.06vw + .8px,1.7px)}
 .ogline path,.wo path{fill:none;stroke:currentColor;stroke-width:max(1.1px,.045em);stroke-linecap:round;vector-effect:non-scaling-stroke}
-.wp{cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.wp{-webkit-user-select:none;user-select:none;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .wp:focus:not(:focus-visible){outline:none}
 .wc{display:inline-flex;justify-content:center;position:relative;transition:width .6s cubic-bezier(.6,0,.2,1);transition-delay:calc(var(--i)*40ms)}
 .wl{display:inline-block;transform-origin:50% 62%;transition:opacity .32s,transform .5s cubic-bezier(.6,0,.2,1),filter .32s;transition-delay:calc(var(--i)*40ms)}
@@ -133,7 +136,7 @@ h1 span{display:block}
   <div class="wrap"><div class="card">
     <p class="lab">The name</p>
     <p class="ogline" aria-hidden="true"></p>
-    <p class="word" role="img" aria-label="aistriú">aistri<svg viewBox="28.5 13 63 94.5" aria-hidden="true"><path class="u-stroke" stroke-width="15" d="M36 54V76a24 24 0 0 0 48 0V54"/><path class="u-fada" stroke-width="12" d="M51 37L73 19"/></svg></p>
+    <p class="word" role="img" aria-label="aistriú">aistri<span class="sr">ú</span><svg viewBox="28.5 13 63 94.5" aria-hidden="true"><path class="u-stroke" stroke-width="15" d="M36 54V76a24 24 0 0 0 48 0V54"/><path class="u-fada" stroke-width="12" d="M51 37L73 19"/></svg></p>
     <p class="say">ASH-troo · /ˈaʃtʲɾʲuː/</p>
     <p class="pos">noun, Irish</p>
     <ol>
@@ -184,9 +187,10 @@ const UK = FS*0.5425/61, UX = 6*CELL + CELL/2;
 gl.innerHTML = '<rect x="-' + EXT + '" y="0" width="' + (W + 2*EXT) + '" height="112" fill="transparent"/><path class="ln"/>'
   + cells.map(c => '<g class="hl">' + c.xs.map(x => `<path d="${strokeD(c.type, x)}"/>`).join('') + '</g>').join('')
   + LAT.slice(0, 6).map((ch, i) => `<text x="${i*CELL + CELL/2}" y="${BASE}">${ch}</text>`).join('')
+  + `<text class="sr" x="${6*CELL + CELL/2}" y="${BASE}">ú</text>`
   + `<g class="ug"><g transform="translate(${UX} ${BASE + 0.4}) scale(${UK.toFixed(4)}) translate(-60 -107.5)"><path class="uu" d="M36 54V76a24 24 0 0 0 48 0V54"/><path class="uf" d="M51 37L73 19"/></g></g>`
   + WORD.map((l, i) => `<rect class="cell" data-i="${i}" x="${i*CELL}" y="0" width="${CELL}" height="112" fill="transparent"/>`).join('');
-const ln = gl.querySelector('.ln'), hl = [...gl.querySelectorAll('.hl')], txt = [...gl.querySelectorAll('text'), gl.querySelector('.ug')];
+const ln = gl.querySelector('.ln'), hl = [...gl.querySelectorAll('.hl')], txt = [...gl.querySelectorAll('text:not(.sr)'), gl.querySelector('.ug')];
 
 let m = 0, target = 0, phase = 0, raf = 0, last = 0, run = 0;
 function draw(){
